@@ -1,0 +1,11 @@
+.moviesList{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.moviesItem{
+  padding: 20px 10px;
+  background-color: aquamarine;
+  border-radius: 30px;
+}

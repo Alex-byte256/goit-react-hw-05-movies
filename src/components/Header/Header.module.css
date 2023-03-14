@@ -1,0 +1,14 @@
+.active {
+  color: red;
+}
+
+.link{
+  color: blue;
+}
+
+
+
+.header{
+  display: flex;
+  gap: 35px;
+}
