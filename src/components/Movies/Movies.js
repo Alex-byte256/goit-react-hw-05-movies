@@ -5,26 +5,25 @@ import { useSearchParams } from 'react-router-dom';
 
 
 function Movies (){
-  const[query, setQuery] = useState('');
-  const[movies,setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = useMemo(
+    () => Object.fromEntries([...searchParams]),
+    [searchParams]
+  );
+
+  const[query, setQuery] = useState(params.query ?? '');
+  const[movies,setMovies] = useState([]);
 
 
   useEffect(()=>{
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=9095dc0682bb2e62c57b5cbea7d9ca43&language=en-US&page=1&include_adult=false&query=${query}`)
       .then(el => el.json()).then(el => {
         setMovies(el.results)
-        setSearchParams({query:query})
+        setSearchParams(query?{query:query}:{})
     })
     // eslint-disable-next-line
   },[query])
 
-  const params = useMemo(
-    () => Object.fromEntries([...searchParams]),
-    [searchParams]
-  );
-
-  const {query: searchQuery} = params;
 
   const handleOnChange = (e)=>{
     setQuery(e.target.value)
