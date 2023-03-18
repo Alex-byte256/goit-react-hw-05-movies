@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header';
+import { Suspense } from 'react';
 
 
 function MainLayout() {
@@ -7,7 +8,9 @@ function MainLayout() {
   return(
     <div>
       <Header/>
-        <Outlet/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
       <h2>footer</h2>
     </div>
   )

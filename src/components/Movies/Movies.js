@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import css from './Movies.module.css'
 import { nanoid } from 'nanoid';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 
 function Movies (){
@@ -29,19 +29,17 @@ function Movies (){
     setQuery(e.target.value)
   }
 
-
-
-console.log(movies)
-
   return(
     <>
+      <h2>Введіть назву фільму</h2>
         <input onChange={handleOnChange} type="text" value={query}/>
       <div className={css.moviesList}>
-        {movies?movies.map(el => (
-          <div className={css.moviesItem} key={nanoid()}>
+        {movies?movies.map(el => ( <Link key={nanoid()} to={`${el.id}`} >
+          <div className={css.moviesItem} >
             <img width={400} src={`https://image.tmdb.org/t/p/w500/${el.poster_path}`} alt={el.title || el.name}/>
             <h2>{el.name||el.title}</h2>
           </div>
+          </Link>
         )):""}
       </div>
     </>
